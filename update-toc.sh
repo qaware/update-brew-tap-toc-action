@@ -65,5 +65,5 @@ echo "----"
 
 for file in ${INPUT_REPLACE_IN//,/ }; do
     # https://stackoverflow.com/questions/2699666/replace-delimited-block-of-text-in-file-with-the-contents-of-another-file
-    sed -i -ne '/'"$INPUT_REPLACE_MARKER_START"'/ {p; r '<(cat <<<"$toc") -e ':a; n; /'"$INPUT_REPLACE_MARKER_START"'/ {p; b}; ba}; p' "$file"
+    sed -i -ne '/'"$INPUT_REPLACE_MARKER_START"'/ {p; r '<(cat <<<"$toc") -e ':a; n; /'"$INPUT_REPLACE_MARKER_END"'/ {p; b}; ba}; p' "$file"
 done

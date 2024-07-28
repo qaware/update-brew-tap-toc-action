@@ -1,7 +1,7 @@
 # update-brew-tap-toc-action
 
 This GitHub action reads the Homebrew tap folder and procduces a table of content.
-The list of formulae is then placed in the specified files.
+The list of formulae is then placed in the specified files, eg. your README.md.
 
 ## Example
 

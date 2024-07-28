@@ -1,0 +1,31 @@
+name: update-brew-tap-toc-action
+description: Reads the formulae stored in the tap (repo) and updates the list in the README
+author: aeimer
+inputs:
+  formula-folder:
+    description: The folder path from the repo root where the Formulae are placed
+    required: true
+    default: Formula
+  replace-in:
+    description: In which files should the TOC be updated. Eg. "README.md,docs/content.adoc"
+    required: true
+    default: README.md
+  replace-marker-start:
+    description: Where to replace the TOC starts
+    required: true
+    default: <!-- BEGIN TOC -->
+  replace-marker-end:
+    description: Where to replace the TOC ends
+    required: true
+    default: <!-- END TOC -->
+runs:
+  using: composite
+  steps:
+    - name: Update TOC
+      shell: bash
+      run: ${{ github.action_path }}/update-toc.sh
+      env:
+        INPUT_FORMULA_FOLDER: ${{ inputs.formula-folder }}
+        INPUT_REPLACE_IN: ${{ inputs.replace-in }}
+        INPUT_REPLACE_MARKER_START: ${{ inputs.replace-marker-start }}
+        INPUT_REPLACE_MARKER_END: ${{ inputs.replace-marker-end }}

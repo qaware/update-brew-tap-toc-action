@@ -1,0 +1,17 @@
+name: Run checks and tests
+run-name: Run checks and tests ⚡️
+on:
+  push:
+    paths:
+      - '**.sh'
+jobs:
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master

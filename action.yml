@@ -1,6 +1,9 @@
 name: update-brew-tap-toc-action
 description: Reads the formulae stored in the tap (repo) and updates the list in the README
 author: aeimer
+branding:
+  icon: chevrons-right
+  color: yellow
 inputs:
   formula-folder:
     description: The folder path from the repo root where the Formulae are placed

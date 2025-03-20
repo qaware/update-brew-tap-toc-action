@@ -8,7 +8,7 @@ set -euo pipefail
 # FUNCTIONS #
 #############
 
-function generateToc() {
+generateToc() {
   programNameList=()
 
   while read -r file; do
@@ -17,10 +17,11 @@ function generateToc() {
   done < <(find "$INPUT_FORMULA_FOLDER" -maxdepth 1 -type f -name '*.rb' -exec basename {} \; | sort)
 
   if [[ ${#programNameList[@]} == "0" ]]; then
-    programNameList=("_n/a (no formula found)_")
+    echo "_n/a (no formula found)_"
+    return
   fi
 
-  printf "* %s\n" "${programNameList[@]}" | sort -u
+  printf "* \`%s\`\n" "${programNameList[@]}" | sort -u
 }
 
 ###############
@@ -51,6 +52,15 @@ if [[ -z "${INPUT_REPLACE_MARKER_END:-}" ]]; then
     exit 1
 fi
 echo "  replace-marker-start: $INPUT_REPLACE_MARKER_END"
+
+##################
+# SANITIZE INPUT #
+##################
+
+# Escape MARKER
+markerSanitizeQuery='s_[]$.*[/\^]_\\&_g'
+INPUT_REPLACE_MARKER_START=$(sed "$markerSanitizeQuery" <<<"$INPUT_REPLACE_MARKER_START")
+INPUT_REPLACE_MARKER_END=$(sed "$markerSanitizeQuery" <<<"$INPUT_REPLACE_MARKER_END")
 
 #######
 # RUN #

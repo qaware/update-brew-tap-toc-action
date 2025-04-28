@@ -15,7 +15,7 @@ on:
     branches:
       - main
     paths:
-      - Formula/*.rb
+      - Formula/**/*.rb
       - README.md
 jobs:
   update-toc:

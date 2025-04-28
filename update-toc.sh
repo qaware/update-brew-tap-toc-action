@@ -14,7 +14,7 @@ generateToc() {
   while read -r file; do
     programName=$(cut -d@ -f1 <<<"$file" | sed 's/.rb//')
     programNameList+=("$programName")
-  done < <(find "$INPUT_FORMULA_FOLDER" -maxdepth 1 -type f -name '*.rb' -exec basename {} \; | sort)
+  done < <(find "$INPUT_FORMULA_FOLDER" -type f -name '*.rb' -exec basename {} \; | sort)
 
   if [[ ${#programNameList[@]} == "0" ]]; then
     echo "_n/a (no formula found)_"
